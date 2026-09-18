@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 //  Tipe & nilai default konfigurasi situs.
 //  Semua field di sini bisa diubah lewat halaman /admin.
 // ============================================================
@@ -93,7 +93,24 @@ export const DEFAULT_CONFIG: SiteConfig = {
       ],
     },
   },
-  members: {}, // diisi lewat /admin; kosong = kartu menampilkan placeholder "Foto menyusul"
+  members: {
+    abby: "/assets/members/abby.png",
+    jose: "/assets/members/jose.png",
+    velyn: "/assets/members/velyn.png",
+    retha: "/assets/members/retha.png",
+    laura: "/assets/members/laura.png",
+    angel: "/assets/members/angel.png",
+    georgius: "/assets/members/georgius.png",
+    henokh: "",
+    rafael: "/assets/members/rafael.png",
+    cristian: "/assets/members/cristian.png",
+    hendrik: "/assets/members/hendrik.png",
+    ago: "/assets/members/ago.png",
+    echa: "/assets/members/echa.png",
+    nia: "/assets/members/nia.png",
+    nana: "/assets/members/nana.png",
+    keisya: "/assets/members/keisya.png",
+  },
 };
 
 function deepMerge<T>(base: T, patch: Partial<T>): T {
