@@ -4,7 +4,7 @@ import SigIcon from "./SigIcon";
 
 const DAYS = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"];
 
-export default function RequestLagu() {
+export default function RequestLagu({ sheetWebhookUrl }: { sheetWebhookUrl: string }) {
   const [day, setDay] = useState("");
   const [invalid, setInvalid] = useState<Record<string, boolean>>({});
   const [showOk, setShowOk] = useState(false);
@@ -12,13 +12,20 @@ export default function RequestLagu() {
   const okTimer = useRef<ReturnType<typeof setTimeout>>();
 
   function submitRequest(data: Record<string, string>) {
-    // Dikirim ke endpoint kita sendiri, bukan langsung ke webhook Google
-    // Sheets -- supaya URL webhook itu tidak pernah terlihat di browser
-    // pengunjung (lihat app/api/request-lagu/route.ts).
-    return fetch("/api/request-lagu", {
+    if (!sheetWebhookUrl) {
+      console.warn("sheetWebhookUrl belum diisi. Atur lewat halaman /admin.");
+      return Promise.resolve();
+    }
+    // mode "no-cors" wajib untuk Apps Script Web App dari sisi browser.
+    // Konsekuensinya: respons tidak bisa dibaca (opaque), jadi kita anggap
+    // terkirim begitu request selesai dilempar, tanpa bisa memverifikasi
+    // status sukses/gagal dari sisi JavaScript.
+    const body = new URLSearchParams(data).toString();
+    return fetch(sheetWebhookUrl, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body,
     }).catch(() => {});
   }
 

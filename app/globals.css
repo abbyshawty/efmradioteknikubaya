@@ -470,38 +470,3 @@
   .admin-shell{padding:40px 16px 80px}
   .admin-card{padding:20px}
 }
-
-/* =====================================================================
-   ADMIN: crop & upload widget
-   ===================================================================== */
-.crop-field{margin-bottom:20px}
-.crop-field > label{display:block;font-family:var(--font-d);font-weight:600;font-size:.88rem;margin-bottom:5px}
-.crop-preview{display:flex;align-items:center;gap:16px;margin-top:8px}
-.crop-thumb{width:80px;border-radius:12px;overflow:hidden;border:1px solid var(--line);
-  background:rgba(8,7,15,.4);display:grid;place-items:center;color:var(--dim);flex:none}
-.crop-thumb img{width:100%;height:100%;object-fit:cover}
-.crop-editor{margin-top:10px;border:1px solid var(--line);border-radius:14px;padding:16px;
-  background:rgba(8,7,15,.35)}
-.crop-frame{position:relative;overflow:hidden;border-radius:10px;border:1px solid var(--violet);
-  cursor:grab;touch-action:none;background:#000;margin:0 auto}
-.crop-frame:active{cursor:grabbing}
-.crop-controls{display:flex;align-items:center;gap:10px;margin-top:14px;color:var(--dim)}
-.crop-controls input[type=range]{flex:1;accent-color:var(--violet)}
-.crop-actions{display:flex;gap:10px;margin-top:14px}
-.crop-actions .admin-remove{flex:1;border:1px solid var(--line);border-radius:10px;padding:10px;
-  background:transparent}
-.crop-confirm{width:auto;flex:2;padding:10px 18px;font-size:.85rem}
-
-/* =====================================================================
-   ADMIN: login gate
-   ===================================================================== */
-.admin-login-shell{min-height:100vh;display:grid;place-items:center;padding:24px}
-.admin-login-card{width:100%;max-width:380px;border:1px solid var(--line);border-radius:18px;
-  padding:32px;background:linear-gradient(180deg,var(--panel),rgba(14,12,34,.4));text-align:center}
-.admin-login-card h1{font-family:var(--font-d);font-weight:800;font-size:1.5rem;margin:14px 0 6px}
-.admin-login-card p{color:var(--dim);font-size:.9rem;margin-bottom:22px}
-.admin-login-icon{width:52px;height:52px;border-radius:14px;margin:0 auto;display:grid;place-items:center;
-  background:rgba(124,92,255,.14);border:1px solid var(--line);color:var(--violet);font-size:24px}
-.admin-logout{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-d);font-size:.82rem;
-  color:var(--dim);background:none;border:0;cursor:pointer}
-.admin-logout:hover{color:var(--paper)}

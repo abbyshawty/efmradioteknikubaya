@@ -14,10 +14,6 @@ const redis = hasRedis ? Redis.fromEnv() : null;
 
 export const storageMode: "redis" | "file" = redis ? "redis" : "file";
 
-// diekspor supaya lib/auth.ts (rate limiting login) bisa memakai koneksi
-// Redis yang sama, tanpa membuat koneksi baru
-export { redis };
-
 export async function storageGet(): Promise<unknown | null> {
   if (redis) {
     return (await redis.get(KEY)) ?? null;
