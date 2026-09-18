@@ -33,6 +33,7 @@ function safeEqual(a: string, b: string): boolean {
   if (bufA.length !== bufB.length) return false;
   return timingSafeEqual(bufA, bufB);
 }
+export { safeEqual };
 
 export function createSessionToken(): string {
   const exp = Date.now() + SESSION_TTL_MS;
@@ -94,8 +95,13 @@ const memoryAttempts = new Map<string, { count: number; resetAt: number }>();
 
 export async function isRateLimited(ip: string): Promise<boolean> {
   if (redis) {
-    const count = await redis.get<number>(`admin:login:fail:${ip}`);
-    return (count ?? 0) >= MAX_ATTEMPTS;
+    try {
+      const count = await redis.get<number>(`admin:login:fail:${ip}`);
+      return (count ?? 0) >= MAX_ATTEMPTS;
+    } catch {
+      // Redis lagi bermasalah -- jangan sampai login jadi ikut mati karenanya.
+      return false;
+    }
   }
   const entry = memoryAttempts.get(ip);
   if (!entry) return false;
@@ -108,9 +114,13 @@ export async function isRateLimited(ip: string): Promise<boolean> {
 
 export async function recordFailedAttempt(ip: string): Promise<void> {
   if (redis) {
-    const key = `admin:login:fail:${ip}`;
-    const count = await redis.incr(key);
-    if (count === 1) await redis.expire(key, WINDOW_SEC);
+    try {
+      const key = `admin:login:fail:${ip}`;
+      const count = await redis.incr(key);
+      if (count === 1) await redis.expire(key, WINDOW_SEC);
+    } catch {
+      // diamkan -- kegagalan mencatat percobaan tidak boleh menjatuhkan login
+    }
     return;
   }
   const entry = memoryAttempts.get(ip);
@@ -123,7 +133,11 @@ export async function recordFailedAttempt(ip: string): Promise<void> {
 
 export async function clearFailedAttempts(ip: string): Promise<void> {
   if (redis) {
-    await redis.del(`admin:login:fail:${ip}`);
+    try {
+      await redis.del(`admin:login:fail:${ip}`);
+    } catch {
+      // diamkan -- sama seperti di atas
+    }
     return;
   }
   memoryAttempts.delete(ip);

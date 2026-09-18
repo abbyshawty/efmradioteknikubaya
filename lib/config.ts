@@ -93,7 +93,28 @@ export const DEFAULT_CONFIG: SiteConfig = {
       ],
     },
   },
-  members: {}, // diisi lewat /admin; kosong = kartu menampilkan placeholder "Foto menyusul"
+  members: {
+    // ✏️ Data foto awal. Sudah dipindah dari data/config.json ke sini karena
+    // Next.js tidak selalu ikut membundel file yang dibaca lewat fs.readFileSync
+    // dengan path dinamis ke fungsi serverless Vercel -- menaruhnya sebagai kode
+    // langsung memastikan datanya selalu ikut ter-deploy.
+    abby: "/assets/members/abby.png",
+    jose: "/assets/members/jose.png",
+    velyn: "/assets/members/velyn.png",
+    retha: "/assets/members/retha.png",
+    laura: "/assets/members/laura.png",
+    angel: "/assets/members/angel.png",
+    georgius: "/assets/members/georgius.png",
+    henokh: "",
+    rafael: "/assets/members/rafael.png",
+    cristian: "/assets/members/cristian.png",
+    hendrik: "/assets/members/hendrik.png",
+    ago: "/assets/members/ago.png",
+    echa: "/assets/members/echa.png",
+    nia: "/assets/members/nia.png",
+    nana: "/assets/members/nana.png",
+    keisya: "/assets/members/keisya.png",
+  },
 };
 
 function deepMerge<T>(base: T, patch: Partial<T>): T {

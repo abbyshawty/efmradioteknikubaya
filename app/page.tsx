@@ -32,7 +32,7 @@ export default async function Home() {
           channelUrl: config.channelUrl,
         }}
       />
-      <RequestLagu sheetWebhookUrl={config.sheetWebhookUrl} />
+      <RequestLagu />
       <About />
       <ProgramKerja programKerja={config.programKerja} />
       <Divisi members={config.members} />
