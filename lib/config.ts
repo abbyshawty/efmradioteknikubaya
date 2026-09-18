@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 //  Tipe & nilai default konfigurasi situs.
 //  Semua field di sini bisa diubah lewat halaman /admin.
 // ============================================================
@@ -94,6 +94,10 @@ export const DEFAULT_CONFIG: SiteConfig = {
     },
   },
   members: {
+    // ✏️ Data foto awal. Sudah dipindah dari data/config.json ke sini karena
+    // Next.js tidak selalu ikut membundel file yang dibaca lewat fs.readFileSync
+    // dengan path dinamis ke fungsi serverless Vercel -- menaruhnya sebagai kode
+    // langsung memastikan datanya selalu ikut ter-deploy.
     abby: "/assets/members/abby.png",
     jose: "/assets/members/jose.png",
     velyn: "/assets/members/velyn.png",
