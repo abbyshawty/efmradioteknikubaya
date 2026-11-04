@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useRef } from "react";
+import type { SiteConfig } from "@/lib/config";
 
-const GLITCH_LINES = ["E-FM Radio Kampus", "Universitas Surabaya"];
-
-export default function Hero() {
+export default function Hero({ hero }: { hero: SiteConfig["hero"] }) {
+  const glitchLines = [hero.line1, hero.line2];
   const needleRef = useRef<HTMLDivElement>(null);
   const waveRef = useRef<HTMLCanvasElement>(null);
   const radarRef = useRef<HTMLCanvasElement>(null);
@@ -153,7 +153,7 @@ export default function Hero() {
       const CHARS = "01/\\|<>#$%_ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       glitchRefs.current.forEach((el, idx) => {
         if (!el) return;
-        const final = GLITCH_LINES[idx];
+        const final = glitchLines[idx];
         let frame = 0;
         const totalFrames = 16;
         const startDelay = idx * 220;
@@ -187,22 +187,21 @@ export default function Hero() {
     <section className="hero">
       <div className="wrap hero-in">
         <div>
-          {/* ✏️ EDIT: nama & subjudul stasiun */}
           <h1 className="station">
             <span
               className="glitch"
               ref={(el) => { glitchRefs.current[0] = el; }}
             >
-              {GLITCH_LINES[0]}
+              {glitchLines[0]}
             </span>
             <br />
             <span
               className="glitch"
               ref={(el) => { glitchRefs.current[1] = el; }}
             >
-              {GLITCH_LINES[1]}
+              {glitchLines[1]}
             </span>
-            <span className="thin">Fresh Your Mind with Edutainment Radio</span>
+            <span className="thin">{hero.tagline}</span>
           </h1>
         </div>
 

@@ -1,10 +1,17 @@
 "use client";
 import { useRef, useState } from "react";
 import SigIcon from "./SigIcon";
+import type { SiteConfig } from "@/lib/config";
 
 const DAYS = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"];
 
-export default function RequestLagu() {
+export default function RequestLagu({
+  section,
+  instagram,
+}: {
+  section: SiteConfig["requestSection"];
+  instagram: string;
+}) {
   const [day, setDay] = useState("");
   const [invalid, setInvalid] = useState<Record<string, boolean>>({});
   const [showOk, setShowOk] = useState(false);
@@ -55,22 +62,29 @@ export default function RequestLagu() {
       <div className="wrap">
         <div className="head">
           <SigIcon />
-          <h2>Request Lagu</h2>
-          <p>Isi form di bawah, lagu pilihan kalian akan direview oleh team Music Director sebelum diputar. Jangan lupa baca aturan singkatnya terlebih dahulu.</p>
+          <h2>{section.title}</h2>
+          {section.desc && <p>{section.desc}</p>}
         </div>
 
         <div className="req-grid">
-          {/* ✏️ EDIT: aturan request lagu */}
           <div className="list-panel">
             <h3><i className="ph-bold ph-list-checks" style={{ color: "var(--violet)" }} />Aturan singkat</h3>
             <ol>
-              <li><b>1</b>Tidak menerima lagu bergenre dangdut atau genre lain yang riuh saat diputar di area kampus.</li>
-              <li><b>2</b>Hindari lagu dengan lirik eksplisit. Cek label &quot;E&quot; di Spotify, YouTube Music, atau Apple Music sebelum request.</li>
-              <li><b>3</b>Tidak menerima lagu bermuatan SARA, politik, isu sensitif, atau lagu rohani.</li>
-              <li><b>4</b>Lagu diputar Senin sampai Jumat, pukul 12.30 sampai 13.00. Jadwal dapat berubah sewaktu-waktu.</li>
-              <li><b>5</b>Jika lagumu belum diputar, kemungkinan menunggu giliran atau belum sesuai aturan di atas.</li>
+              {section.rules.map((rule, i) => (
+                <li key={i}><b>{i + 1}</b>{rule}</li>
+              ))}
             </ol>
-            <p className="note">Ada pertanyaan atau mau paid promote? DM Instagram <a href="https://www.instagram.com/efmradioubaya" target="_blank" rel="noopener noreferrer">@efmradioubaya</a>.</p>
+            {(section.noteText || section.noteLinkText) && (
+              <p className="note">
+                {section.noteText}
+                {section.noteLinkText && (
+                  <>
+                    {" "}
+                    <a href={instagram} target="_blank" rel="noopener noreferrer">{section.noteLinkText}</a>.
+                  </>
+                )}
+              </p>
+            )}
           </div>
 
           <form className="req-form" ref={formRef} onSubmit={handleSubmit} noValidate>

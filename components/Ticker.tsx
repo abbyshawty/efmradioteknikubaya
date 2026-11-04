@@ -1,9 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-const MESSAGE = "Request lagu? Kirim melalui page Request Lagu";
-
-export default function Ticker() {
+export default function Ticker({ message }: { message: string }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,7 +30,7 @@ export default function Ticker() {
   return (
     <a href="#request" className="ticker" aria-label="Buka halaman Request Lagu">
       <div className="ticker-track" ref={ref}>
-        <span>{MESSAGE}</span>
+        <span>{message}</span>
         <span className="dot">·</span>
       </div>
     </a>

@@ -9,7 +9,13 @@ const ICONS: Record<string, string> = {
   tahunan: "ph-calendar-star",
 };
 
-export default function ProgramKerja({ programKerja }: { programKerja: ProgramKerjaType }) {
+export default function ProgramKerja({
+  section,
+  programKerja,
+}: {
+  section: { title: string; desc: string };
+  programKerja: ProgramKerjaType;
+}) {
   const { openDetail, openList } = useModal();
 
   function handleClick(key: keyof ProgramKerjaType) {
@@ -24,8 +30,8 @@ export default function ProgramKerja({ programKerja }: { programKerja: ProgramKe
       <div className="wrap">
         <div className="head">
           <SigIcon />
-          <h2>Program Kerja E-FM</h2>
-          <p>Pilih kategori untuk melihat dokumentasi foto dan detail program kerja kami.</p>
+          <h2>{section.title}</h2>
+          {section.desc && <p>{section.desc}</p>}
         </div>
         <div className="wp-grid">
           {(Object.keys(programKerja) as (keyof ProgramKerjaType)[]).map((key) => (

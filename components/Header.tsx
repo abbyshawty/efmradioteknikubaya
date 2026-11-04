@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import type { SiteConfig } from "@/lib/config";
 
 const links: [string, string][] = [
   ["#live", "Live Streaming"],
@@ -10,15 +11,15 @@ const links: [string, string][] = [
   ["#kontak", "Social Media"],
 ];
 
-export default function Header() {
+export default function Header({ logos }: { logos: SiteConfig["logos"] }) {
   const [open, setOpen] = useState(false);
   return (
     <header className="top">
       <div className="wrap top-in">
         <div className="idmark">
-          <img className="efm" src="/assets/logo-efm.png" alt="107.9 E-FM" />
+          <img className="efm" src={logos.efm} alt="107.9 E-FM" />
           <span className="sep" />
-          <img className="uby" src="/assets/logo-ubaya.png" alt="Universitas Surabaya" />
+          <img className="uby" src={logos.ubaya} alt="Universitas Surabaya" />
         </div>
         <nav id="nav" className={open ? "open" : ""}>
           {links.map(([href, label]) => (

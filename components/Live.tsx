@@ -8,7 +8,7 @@ type LiveConfig = {
   channelUrl: string;
 };
 
-export default function Live({ config }: { config: LiveConfig }) {
+export default function Live({ title, config }: { title: string; config: LiveConfig }) {
   const screenRef = useRef<HTMLDivElement>(null);
   const chatBodyRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -71,7 +71,7 @@ export default function Live({ config }: { config: LiveConfig }) {
       <div className="wrap">
         <div className="head">
           <SigIcon />
-          <h2>Live Streaming</h2>
+          <h2>{title}</h2>
         </div>
 
         <div className="live-grid">

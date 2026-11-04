@@ -21,22 +21,24 @@ export default async function Home() {
 
   return (
     <ModalProvider>
-      <Header />
-      <Hero />
-      <Ticker />
-      <VisiMisi />
+      <Header logos={config.logos} />
+      <Hero hero={config.hero} />
+      <Ticker message={config.ticker.message} />
+      <VisiMisi visiMisi={config.visiMisi} />
       <Live
+        title={config.liveSection.title}
         config={{
           youtubeVideoId: config.youtubeVideoId,
           liveChatDomain: config.liveChatDomain,
           channelUrl: config.channelUrl,
         }}
       />
-      <RequestLagu />
-      <About />
-      <ProgramKerja programKerja={config.programKerja} />
-      <Divisi members={config.members} />
+      <RequestLagu section={config.requestSection} instagram={config.instagram} />
+      <About about={config.about} />
+      <ProgramKerja section={config.programSection} programKerja={config.programKerja} />
+      <Divisi title={config.divisiSection.title} divisions={config.divisions} />
       <Kontak
+        section={config.kontak}
         config={{
           instagram: config.instagram,
           youtube: config.youtube,
@@ -45,7 +47,7 @@ export default async function Home() {
           email: config.email,
         }}
       />
-      <Footer />
+      <Footer logos={config.logos} text={config.footer.text} />
     </ModalProvider>
   );
 }

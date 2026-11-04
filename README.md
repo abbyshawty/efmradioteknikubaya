@@ -36,27 +36,27 @@ untuk panel admin (juga ada link "Admin" kecil di footer situs).
 
 ## 3. Apa saja yang bisa diatur lewat `/admin`
 
-Semua ini tersimpan terpusat dan langsung tampil di halaman utama begitu
-disimpan — tidak perlu deploy ulang:
+Semua konten halaman utama tersimpan terpusat dan langsung tampil begitu
+disimpan — tidak perlu deploy ulang. Panel admin dibagi per tab:
 
-- **Live Streaming**: ID video live YouTube, domain untuk live chat, link
-  channel YouTube
-- **Media Sosial**: Instagram, YouTube, Spotify, TikTok, email kontak
-- **Request Lagu**: URL webhook Google Apps Script (lihat
-  `SETUP-REQUEST-LAGU.md`) — URL ini disembunyikan dari pengunjung, lihat
-  bagian keamanan di bawah
-- **Program Kerja**: judul, deskripsi, dan **foto dokumentasi** (unggah
-  langsung + potong/zoom sendiri di halaman admin) untuk setiap item di
-  kategori Harian / Bulanan / Tahunan — bisa tambah atau hapus item
-- **Foto anggota divisi**: unggah + potong/zoom foto untuk masing-masing
-  dari 16 anggota, rasio otomatis terkunci 1:1
+- **Umum**: logo E-FM & Ubaya (header + footer), baris identitas di footer
+- **Hero**: judul baris 1 & 2, tagline, dan teks berjalan (ticker)
+- **Visi Misi**: judul bagian, poin visi & misi (tambah/hapus/urutkan)
+- **Live**: judul bagian, ID video live YouTube, domain live chat, link channel
+- **Request Lagu**: judul, deskripsi, daftar aturan, catatan + link Instagram,
+  dan URL webhook Google Apps Script (lihat `SETUP-REQUEST-LAGU.md`) — URL
+  ini disembunyikan dari pengunjung, lihat bagian keamanan di bawah
+- **About**: judul, paragraf sejarah, dan fakta singkat (Sejak, Jangkauan, dst.)
+- **Program Kerja**: judul bagian, judul kategori, serta judul, deskripsi,
+  dan **foto dokumentasi** (unggah + potong/zoom, rasio 16:10) per item
+- **Divisi**: tambah/hapus/urutkan divisi dan anggota; nama divisi, kode,
+  deskripsi, nama, nama panggilan, peran, dan foto (rasio 1:1) per anggota
+- **Kontak**: judul & deskripsi bagian, link Instagram/YouTube/Spotify/TikTok,
+  email kontak
 
-**Yang TIDAK diatur lewat admin** (sengaja tetap di kode, karena jarang
-berubah): nama/peran anggota (`components/Divisi.tsx`), teks Visi & Misi
-(`components/VisiMisi.tsx`), sejarah "About E-FM" (`components/About.tsx`),
-aturan Request Lagu (`components/RequestLagu.tsx`), judul & tagline hero
-(`components/Hero.tsx`). Semua ditandai komentar `EDIT` di lokasi yang
-perlu diubah.
+Yang tetap di kode: menu navigasi header, label & pesan form Request Lagu,
+teks status di panel live streaming, serta judul tab browser/SEO
+(`app/layout.tsx`).
 
 ## 4. Setup Wajib Sebelum Deploy
 

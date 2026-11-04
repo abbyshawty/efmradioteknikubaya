@@ -466,6 +466,37 @@
 .admin-back{display:block;text-align:center;margin-top:24px;color:var(--dim);font-size:.9rem}
 .admin-back:hover{color:var(--paper)}
 
+.admin-tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:20px;padding-bottom:4px;scrollbar-width:thin}
+.admin-tabs button{flex:none;display:inline-flex;align-items:center;gap:6px;font-family:var(--font-d);
+  font-weight:600;font-size:.82rem;color:var(--dim);background:transparent;border:1px solid var(--line);
+  border-radius:999px;padding:8px 14px;cursor:pointer;white-space:nowrap}
+.admin-tabs button:hover{color:var(--paper)}
+.admin-tabs button.active{color:#fff;background:rgba(124,92,255,.22);border-color:var(--violet)}
+
+.admin-item-tools{display:flex;align-items:center;gap:8px;margin-top:6px}
+.admin-item-tools .admin-remove{margin-top:0;margin-left:auto}
+.admin-icon-btn{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;
+  border:1px solid var(--line);background:transparent;color:var(--paper);cursor:pointer}
+.admin-icon-btn:hover:not(:disabled){border-color:var(--violet)}
+.admin-icon-btn:disabled{opacity:.35;cursor:not-allowed}
+
+.admin-list-row{display:grid;grid-template-columns:28px 1fr;gap:6px 10px;margin-bottom:14px}
+.admin-list-row .admin-item-tools{grid-column:2}
+.admin-list-num{font-family:var(--font-m);color:var(--lilac);font-size:.85rem;padding-top:11px;text-align:right}
+.admin-list-row textarea{width:100%;min-height:60px;resize:vertical;background:var(--void);
+  border:1px solid var(--line);border-radius:10px;padding:11px 13px;color:var(--paper);
+  font-family:var(--font-b);font-size:.9rem}
+.admin-list-row textarea:focus{outline:none;border-color:var(--violet)}
+
+.admin-add-block{width:100%;justify-content:center;padding:14px;margin-bottom:20px}
+
+.admin-savebar{position:sticky;bottom:0;z-index:5;margin-top:8px;padding:14px 0 18px;
+  background:linear-gradient(180deg,transparent,var(--void) 30%)}
+.admin-savebar .admin-status{margin:0 0 10px}
+
+.logo-thumb{width:140px;height:64px;padding:8px}
+.logo-thumb img{object-fit:contain}
+
 @media (max-width:480px){
   .admin-shell{padding:40px 16px 80px}
   .admin-card{padding:20px}

@@ -30,7 +30,13 @@ function CopyEmailBox({ email }: { email: string }) {
   );
 }
 
-export default function Kontak({ config }: { config: KontakConfig }) {
+export default function Kontak({
+  section,
+  config,
+}: {
+  section: { title: string; desc: string };
+  config: KontakConfig;
+}) {
   const { openDetail } = useModal();
 
   function handleEmailClick() {
@@ -51,8 +57,8 @@ export default function Kontak({ config }: { config: KontakConfig }) {
     <section className="band" id="kontak">
       <div className="wrap">
         <div className="cta">
-          <h2>Temukan kami di social media E-FM</h2>
-          <p>Follow Social Media kami untuk informasi acara, event, dan request lagu. Mau kolaborasi siaran atau paid promote hubungi kami melalui email.</p>
+          <h2>{section.title}</h2>
+          {section.desc && <p>{section.desc}</p>}
           <div className="socials">
             <a href={config.instagram} target="_blank" rel="noopener noreferrer">
               <img className="soc-ic" src="/assets/social-instagram.png" alt="" />Instagram
