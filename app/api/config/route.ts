@@ -37,7 +37,20 @@ export async function POST(req: NextRequest) {
   try {
     const saved = await writeConfig(patch as Partial<SiteConfig>);
     return NextResponse.json({ ok: true, config: saved, storage: storageMode });
-  } catch {
-    return NextResponse.json({ error: "Gagal menyimpan konfigurasi." }, { status: 500 });
+  } catch (err: any) {
+    console.error("[config] gagal menyimpan:", err);
+    // Pesan ini hanya sampai ke admin yang sudah login, jadi aman memberi
+    // alasan yang jelas supaya masalahnya bisa langsung dibereskan.
+    let reason: string;
+    if (storageMode === "file" && process.env.VERCEL) {
+      reason =
+        "Upstash Redis belum terbaca di server (UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN). " +
+        "Vercel tidak bisa menyimpan ke file lokal -- isi kedua variabel itu di Settings > Environment Variables lalu redeploy.";
+    } else if (storageMode === "redis") {
+      reason = `Redis menolak penyimpanan: ${err?.message || err}. Pastikan token Upstash bukan token read-only.`;
+    } else {
+      reason = err?.message || String(err);
+    }
+    return NextResponse.json({ error: `Gagal menyimpan konfigurasi. ${reason}` }, { status: 500 });
   }
 }
