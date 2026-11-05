@@ -44,7 +44,8 @@ export async function POST(req: NextRequest) {
     let reason: string;
     if (storageMode === "file" && process.env.VERCEL) {
       reason =
-        "Upstash Redis belum terbaca di server (UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN). " +
+        "Upstash Redis belum terbaca di server (UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN, " +
+        "atau KV_REST_API_URL / KV_REST_API_TOKEN). " +
         "Vercel tidak bisa menyimpan ke file lokal -- isi kedua variabel itu di Settings > Environment Variables lalu redeploy.";
     } else if (storageMode === "redis") {
       reason = `Redis menolak penyimpanan: ${err?.message || err}. Pastikan token Upstash bukan token read-only.`;

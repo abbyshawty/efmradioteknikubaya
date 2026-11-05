@@ -7,10 +7,12 @@
 import { Redis } from "@upstash/redis";
 
 const KEY = "efm:config:v2";
-const hasRedis = !!(
-  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
-);
-const redis = hasRedis ? Redis.fromEnv() : null;
+// Upstash yang dipasang lewat Vercel Marketplace / Storage memakai nama
+// KV_REST_API_*, sedangkan yang disalin manual dari console Upstash memakai
+// UPSTASH_REDIS_REST_*. Keduanya diterima.
+const redisUrl = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+const redis = redisUrl && redisToken ? new Redis({ url: redisUrl, token: redisToken }) : null;
 
 export const storageMode: "redis" | "file" = redis ? "redis" : "file";
 
